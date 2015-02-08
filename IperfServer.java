@@ -23,10 +23,24 @@ public class IperfServer{
 		is=new DataInputStream(clientSocket.getInputStream());
 
 		data=0;
+		int bytesRead=0;
 		startTime= System.nanoTime();//ns
-		while( is.read(readBuff,0,readBuff.length)!=-1 )
+		while(true )
+		{
+			try{
+			is.readFully(readBuff,0,readBuff.length);
+			}
+			catch(Exception e)
+			{
+				break;
+			}
 			data++;
+			//System.out.println(bytesRead);
+		}
 		double totalTime=System.nanoTime()-startTime;
+		is.close();
+		serverSocket.close();
+
 		totalTime=totalTime*Math.pow(10,-9);//in seconds 
 
 		double rate=  (data*Math.pow(10,-3)*8) / totalTime;//KBps
