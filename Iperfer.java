@@ -29,6 +29,7 @@ public class Iperfer{
 		if(portNum<1024 || portNum>65535)
 		{
 			System.out.println("Error: port number must be in the range 1024 to 65535");
+			System.out.println("The give port is "+portNum);
 			return;
 		}
 
